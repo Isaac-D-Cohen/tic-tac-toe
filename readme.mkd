@@ -1,5 +1,4 @@
-
-#About the program
+# About the program
 
 This program implements Tic Tac Toe with many settings and customizations. It was written with Qt in C++ by Isaac Cohen.
 
@@ -15,7 +14,7 @@ This program implements Tic Tac Toe with many settings and customizations. It wa
 
 `Game -> Quit` -- Closes the program
 
-##Settings
+## Settings
 
 To get the main settings dialog, go to `Game -> Settings`. The settings are are divided into three groups:
 
