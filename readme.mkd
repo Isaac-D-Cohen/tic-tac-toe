@@ -1,0 +1,65 @@
+#About the program
+
+This program implements Tic Tac Toe with many settings and customizations. It was written with Qt in C++ by Isaac Cohen.
+
+## Basics
+
+`Game -> New` -- Start a new game. Discards the ongoing one if unsaved
+
+`Game -> Save` -- Save a partially or fully played (completed) game. (To save a completed game, you'll have to click `No` on the dialog asking whether you want to play again, and then do `Game -> Save`.) The output file will include all moves up to the current one, and most of the settings you are using at the time, too.
+
+`Game -> Load` -- Load previously saved games
+
+`Help -> Undo` -- Undo the most recent move. In most cases it will actually undo two moves - the computer's and yours. Notable exceptions are if you just won the game, or if the computer went first.
+
+`Game -> Quit` -- Closes the program
+
+##Settings
+
+To get the main settings dialog, go to `Game -> Settings`. The settings are are divided into three groups:
+
+1) Visual settings - These include the symbols used on the board, fonts for the symbols, colors of the symbols and of the board, and the hint blink time (the length of time for which hints are displayed)
+
+2) Engine settings - These include:
+
+i) Who goes first (you or the computer)
+
+ii) Whether that should alternate on every game (you first, then computer first, etc)
+
+iii) The level on which the computer should play:
+
+* Easy - the engine chooses random moves
+* Intermeidate - the engine uses a combination of knowledge of how good each move is and randomness
+* Impossible - the engine always chooses the best move
+
+iv) A handful of settings that tell the engine how much to value different game outcomes. So for example, you can indicate to the computer with a high number that it should strongly value the human winning by getting a row. The engine will "want" this and may try to achieve it throughout the game. It will assume you want the opposite of whatever it "wants". These values only matter on the `intermediate` and `impossible` modes.
+
+v) A checkbox that let's you determine whether the computer should use the aforementioned values or the board to determine the winner of the game. If checked, the computer will determine the winner by looking at the symbols on the board and applying the standard rules of Tic Tac Toe. Otherwise, the computer will judge whether it won by whether it has achieved its objectives, as given by the values mentioned earlier. (This allows you to change the rules of Tic Tac Toe.)
+
+3) Miscellaneous/Other settings - These settings inlude three checkboxes that describe whether, when a game is loaded, the symbols that were used when the game was played, the engine settings that were used when the game was played and the visual settings from when it was played, should be loaded in along with it. There is also one setting technically in this category that is not set from the settings dialog: The dimensions of the game window. These are set by resizing the window.
+
+## Some details about the workings of settings
+
+Settings can be exported into a file and/or loaded from one made earlier. The program actually stores your settings by default in a file called `settings.txt` that it creates on startup if it doesn't find one in its directory. If you change the settings it will change them in that file and so it can remember them on future runs. If you load settings from a file (using the `Load Settings` button in the settings dialog), the program will record that it's running off "loaded settings" and won't save them to the permanent settings.txt file. Even if you make changes to them, all changes are temporary and will disappear when you close the program, unless you exported the settings with your changes prior to that. There is a way out of this. When running off loaded settings, the settings dialog will allow you to click a (normally greyed out) button that says `Use these as normal settings`. If you click that, the loaded settings will become your normal settings and overwrite the ones you have in settings.txt.
+
+If you load a game with any settings, you will also be in "loaded settings" mode. You will remain in it until you finish with the game and start a new one, whereupon your previous settings will be promply restored - unless, of course, you click `Use these as normal settings`.
+
+# Organization of the code
+
+To read/modify this program, you need Qt Creator. `CMakeLists.txt` is the project file and the one you should open with Qt Creator. It will load the rest of the project in.
+
+`tree.h` and `tree.cpp` contain functions to implement a minimax tree.
+
+`settings.h` and `settings.cpp` implement a library to handle the settings.
+
+`engine.h` and `engine.cpp` make up the engine. The engine calculates the tree before the game and maintains its own record of the game as the game progresses. Moves made by anyone other than the engine must be passed into it. The computers moves are recieved from the engine (with `get_move()`). The engine uses the settings and tree libraries.
+
+`mainwindow.h`, `mainwindow.cpp` and `mainwindow.ui` (files ending in .ui must be open in Qt Creator) implement the main window. They draw the board, accept moves from the user and computer, and handle all logic in the main window (loading and saving games, etc).
+
+`main.cpp` is the entry point of the program. It just creates an instance of the MainWindow class and runs it (via Qt).
+
+`settingsdialog.h`, `settingsdialog.cpp` and `settingsdialog.ui` are the main files implementing the settings dialog. They use `boardview.h` and `boardview.cpp` to implement the little preview of the board that you see in the settings dialog.
+
+Finally, `changeengineoptions.h`, `changeengineoptions.cpp` and `changeengineoptions.ui` implement the mini dialog that allows you to set different values for the engine.
+
+**I hope you enjoy the program!**
