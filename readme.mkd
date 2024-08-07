@@ -1,8 +1,8 @@
-#About the program
+##About the program
 
 This program implements Tic Tac Toe with many settings and customizations. It was written with Qt in C++ by Isaac Cohen.
 
-## Basics
+### Basics
 
 `Game -> New` -- Start a new game. Discards the ongoing one if unsaved
 
@@ -14,7 +14,7 @@ This program implements Tic Tac Toe with many settings and customizations. It wa
 
 `Game -> Quit` -- Closes the program
 
-##Settings
+###Settings
 
 To get the main settings dialog, go to `Game -> Settings`. The settings are are divided into three groups:
 
@@ -38,13 +38,13 @@ v) A checkbox that let's you determine whether the computer should use the afore
 
 3) Miscellaneous/Other settings - These settings inlude three checkboxes that describe whether, when a game is loaded, the symbols that were used when the game was played, the engine settings that were used when the game was played and the visual settings from when it was played, should be loaded in along with it. There is also one setting technically in this category that is not set from the settings dialog: The dimensions of the game window. These are set by resizing the window.
 
-## Some details about the workings of settings
+### Some details about the workings of settings
 
 Settings can be exported into a file and/or loaded from one made earlier. The program actually stores your settings by default in a file called `settings.txt` that it creates on startup if it doesn't find one in its directory. If you change the settings it will change them in that file and so it can remember them on future runs. If you load settings from a file (using the `Load Settings` button in the settings dialog), the program will record that it's running off "loaded settings" and won't save them to the permanent settings.txt file. Even if you make changes to them, all changes are temporary and will disappear when you close the program, unless you exported the settings with your changes prior to that. There is a way out of this. When running off loaded settings, the settings dialog will allow you to click a (normally greyed out) button that says `Use these as normal settings`. If you click that, the loaded settings will become your normal settings and overwrite the ones you have in settings.txt.
 
 If you load a game with any settings, you will also be in "loaded settings" mode. You will remain in it until you finish with the game and start a new one, whereupon your previous settings will be promply restored - unless, of course, you click `Use these as normal settings`.
 
-# Organization of the code
+## Organization of the code
 
 To read/modify this program, you need Qt Creator. `CMakeLists.txt` is the project file and the one you should open with Qt Creator. It will load the rest of the project in.
 
