@@ -562,23 +562,23 @@ void MainWindow::ChangeSettings() {
 
     // the user didn't click cancel, so settings were changed
     if (modified) {
-        s = temp;
 
         this->on_loaded_settings = on_loaded_settings;
         this->on_loaded_game_settings = on_loaded_game_settings;
 
         // if we're not on loaded settings, this seems like a good time to hit save
         if (!on_loaded_settings)
-            s.save_settings(nullptr);
+            temp.save_settings(nullptr);
 
-        computers_pen.setColor(s.computers_color);
-        humans_pen.setColor(s.humans_color);
+        computers_pen.setColor(temp.computers_color);
+        humans_pen.setColor(temp.humans_color);
 
         // if we haven't yet started the game and the settings were changed...
         // start a new one
-        if (move_history.empty())
+        if (move_history.empty()){
+            s = temp;
             StartNewGame();
-        else {
+        } else {
             // update the board
             for (int i=0; i<3; i++)
                 for (int j=0; j<3; j++){
@@ -588,6 +588,7 @@ void MainWindow::ChangeSettings() {
                         board[i][j] = temp.humans_symbol;
                 }
 
+            s = temp;
             this->update();
         }
     }
