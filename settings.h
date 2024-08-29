@@ -2,6 +2,7 @@
 
 #include <QColor>
 #include <QFont>
+#include <QTextStream>
 
 // holds the program settings
 struct settings {
