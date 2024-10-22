@@ -1,24 +1,24 @@
 #include "tree.h"
 
-node * add_branch(node *&main_branch){
+node * add_branch(node *main_branch){
     node * new_node = new node;
     main_branch->branches.push_back(new_node);
     return new_node;
 }
 
-void remove_branch(node *&main_branch, int n){
+void remove_branch(node *main_branch, int n){
     node * branch_node = main_branch->branches[n];
     delete branch_node;
     main_branch->branches.erase(main_branch->branches.begin()+n);
 }
 
-int get_number_of_branches(node *&main_branch){
+int get_number_of_branches(node *main_branch){
     return main_branch->branches.size();
 }
 
 
 // the following two functions scan all branches of a node and return the maximum or minimum number respectively
-int find_max(node *&cur_node){
+int find_max(node *cur_node){
 
     int max, n;
 
@@ -39,7 +39,7 @@ int find_max(node *&cur_node){
     return max;
 }
 
-int find_min(node *&cur_node){
+int find_min(node *cur_node){
 
     int min, n;
 
@@ -126,11 +126,11 @@ void get_positive_partial_sum_vec(node *tree, std::vector <int> &partial_sum, fl
     }
 }
 
-node * get_branch(node *&main_branch, int n){
+node * get_branch(node *main_branch, int n){
     return main_branch->branches[n];
 }
 
-bool is_leaf(node *&the_node){
+bool is_leaf(node *the_node){
     if (the_node->branches.size()==0) return true;
     return false;
 }
