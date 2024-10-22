@@ -243,11 +243,11 @@ int engine::check_for_winner() const {
         if (did_someone_win(s.computers_symbol)) return 0;
         else if (did_someone_win(s.humans_symbol)) return 1;
         else return 2;
-    } else {
+    } else if (is_leaf(tree)){
         if (tree->value > 0) return 0;
         else if (tree->value < 0) return 1;
         else return 2;
-    }
+    } else return 2;
 }
 
 // pass in the human's move
